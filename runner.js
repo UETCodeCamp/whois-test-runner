@@ -84,7 +84,7 @@ async function cleanStack() {
 }
 
 async function checkHealth() {
-	const response = await rp('http://student_server:3000')
+	const response = await rp('http://localhost:3000')
 }
 
 exports.start = start
