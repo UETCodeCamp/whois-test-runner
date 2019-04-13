@@ -76,7 +76,9 @@ async function runMentorTests(mentorRepo, jobId) {
 }
 
 async function cleanStack() {
-	await u._runBash('docker-compose -f docker-compose/student-server-runner.yml rm -sf')
+	const env = 'PORT=3000 HOST=0.0.0.0 MONGO_PATH=mongodb MONGO_PORT=27018 '
+
+	await u._runBash(env + 'docker-compose -f docker-compose/student-server-runner.yml rm -sf')
 	console.log('-------- clean student\'s server stack done --------')
 
 	await u._runBash('docker-compose -f docker-compose/mentor-test-runner.yml rm -sf')
