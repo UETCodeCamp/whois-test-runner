@@ -55,7 +55,7 @@ async function startStudentServer(studentRepo) {
 	console.log('-------- start test-server done --------')
 
 	// checking test-server ready
-	await u._try(90, 1000, 'test-server is unhealthy', checkHealth, null)
+	await u._try(30, 1000, 'test-server is unhealthy', checkHealth, null)
 	console.log('test-server is ready')
 }
 
