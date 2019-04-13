@@ -39,7 +39,7 @@ async function prepareTempDir(...dirs) {
 }
 
 async function startStudentServer(studentRepo) {
-	const env = 'PORT=3000 HOST=localhost MONGO_PATH=mongodb MONGO_PORT=27018 '
+	const env = 'PORT=3000 HOST=0.0.0.0 MONGO_PATH=mongodb MONGO_PORT=27018 '
 	// make sure old stack is removed
 	await u._runBash(env + 'docker-compose -f docker-compose/student-server-runner.yml rm -sf')
 	console.log('-------- clean student\'s server stack done --------')
