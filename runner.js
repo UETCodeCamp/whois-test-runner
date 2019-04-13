@@ -1,5 +1,6 @@
 const rp = require('request-promise')
 const path = require('path')
+const pusher = require('@uet/pusher')
 
 const u = require('./util')
 const git = require('./git')
@@ -12,10 +13,20 @@ const mentorRepoPath = path.join(__dirname, './tmp/mentor-repo')
 async function start(studentRepo, mentorRepo) {
 	try {
 		await prepareTempDir(studentRepoPath, mentorRepoPath)
-		await startStudentServer(studentRepo);
+		await startStudentServer(studentRepo)
 		await runMentorTests(mentorRepo)
+		await cleanStack()
+
+		console.log('--------- exit with success 🎉 -------')
 	} catch (err){
+		console.log('--------- exit with error 🙊 -------')
 		console.log(err.message)
+
+		pusher.submit({
+			is_pass: false,
+			message: '',
+			std_out: '',
+		})
 	}
 }
 
@@ -60,6 +71,14 @@ async function runMentorTests(mentorRepo) {
 	// start stack: nodejs
 	await u._runBash('docker-compose -f docker-compose/mentor-test-runner.yml up')
 	console.log('-------- start run tests done --------')
+}
+
+async function cleanStack() {
+	await u._runBash('docker-compose -f docker-compose/student-server-runner.yml rm -sf')
+	console.log('-------- clean student\'s server stack done --------')
+
+	await u._runBash('docker-compose -f docker-compose/mentor-test-runner.yml rm -sf')
+	console.log('-------- clean mentor\'s server stack done --------')
 }
 
 async function checkHealth() {
