@@ -50,7 +50,7 @@ async function startStudentServer(studentRepo) {
 	await u._runBash('cd tmp/student-repo && npm install')	
 	
 	// start test-server stack: nodejs + mongodb
-	await u._runBash('docker-compose -f docker-compose/student-server-runner.yml up -d')
+	await u._runBash('PORT=3000 HOST=localhost MONGO_PATH=mongodb MONGO_PORT=27018 docker-compose -f docker-compose/student-server-runner.yml up -d')
 	console.log('-------- start test-server done --------')
 
 	// checking test-server ready
