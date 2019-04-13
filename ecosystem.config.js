@@ -7,7 +7,7 @@ module.exports = {
     env: {
 		NODE_ENV: 'production',
 		PORT: 6969,
-		SUBMIT_HOST: 'http://localhost:3222'
+		SUBMIT_HOST: 'https://api-fame.hackermind.dev'
     }
   }],
 };
