@@ -1,0 +1,18 @@
+version: "2"
+services:
+  student-server:
+    container_name: student-server-runner
+    image: minhnt95/student-server-runner
+    volumes:
+      - ../tmp/student-repo:/student-repo
+    ports:
+      - "3000:3000"
+    links:
+      - mongodb
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    #volumes:
+    #  - ./data:/data/db
+    ports:
+      - "27017:27017"

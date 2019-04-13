@@ -1,0 +1,9 @@
+version: "2"
+services:
+  mentor-test:
+    container_name: mentor-test-runner
+    image: minhnt95/mentor-test-runner
+    volumes:
+      - ../tmp/mentor-repo:/mentor-repo
+    ports:
+      - "3001:3001"
