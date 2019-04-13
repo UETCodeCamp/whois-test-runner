@@ -1,9 +1,18 @@
 version: "2"
 services:
-  mentor-test:
-    container_name: mentor-test-runner
+  mentor_test:
+    container_name: mentor_test
     image: minhnt95/mentor-test-runner
     volumes:
       - ../tmp/mentor-repo:/mentor-repo
     ports:
       - "3001:3001"
+    environment:
+      JOB_ID: ${JOB_ID}
+      STUDENT_HOST: ${STUDENT_HOST}
+      SUBMIT_HOST: ${SUBMIT_HOST}
+    networks:
+      - docker-compose_my-net
+networks:
+  docker-compose_my-net:
+    external: true

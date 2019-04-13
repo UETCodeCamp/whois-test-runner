@@ -1,7 +1,7 @@
 version: "2"
 services:
-  student-server:
-    container_name: student-server-runner
+  student_server:
+    container_name: student_server
     image: minhnt95/student-server-runner
     volumes:
       - ../tmp/student-repo:/student-repo
@@ -9,6 +9,8 @@ services:
       - "3000:3000"
     links:
       - mongodb
+    networks:
+      - my-net
   mongodb:
     container_name: mongodb
     image: mongo
@@ -16,3 +18,8 @@ services:
     #  - ./data:/data/db
     ports:
       - "27017:27017"
+    networks:
+      - my-net
+networks:
+    my-net:
+      driver: bridge

@@ -10,11 +10,11 @@ const git = require('./git')
 const studentRepoPath = path.join(__dirname, './tmp/student-repo')
 const mentorRepoPath = path.join(__dirname, './tmp/mentor-repo')
 
-async function start(studentRepo, mentorRepo) {
+async function start(jobId, studentRepo, mentorRepo) {
 	try {
 		await prepareTempDir(studentRepoPath, mentorRepoPath)
 		await startStudentServer(studentRepo)
-		await runMentorTests(mentorRepo)
+		await runMentorTests(mentorRepo, jobId)
 		await cleanStack()
 
 		console.log('--------- exit with success 🎉 -------')
@@ -23,8 +23,9 @@ async function start(studentRepo, mentorRepo) {
 		console.log(err.message)
 
 		pusher.submit({
+			id: jobId, 
 			is_pass: false,
-			message: '',
+			message: err.message,
 			std_out: '',
 		})
 	}
@@ -57,9 +58,9 @@ async function startStudentServer(studentRepo) {
 	console.log('test-server is ready')
 }
 
-async function runMentorTests(mentorRepo) {
+async function runMentorTests(mentorRepo, jobId) {
 	// make sure old stack is removed
-	await u._runBash('docker-compose -f docker-compose/mentor-test-runner.yml rm -sf')
+	await u._runBash(`docker-compose -f docker-compose/mentor-test-runner.yml rm -sf`)
 	console.log('-------- clean mentor\'s server stack done --------')
 
 	// clone project into mentor-repo
@@ -69,7 +70,7 @@ async function runMentorTests(mentorRepo) {
 	await u._runBash('cd tmp/mentor-repo && npm install')	
 	
 	// start stack: nodejs
-	await u._runBash('docker-compose -f docker-compose/mentor-test-runner.yml up')
+	await u._runBash(`STUDENT_HOST=http://student_server:3000 SUBMIT_HOST=https://api-fame.hackermind.dev JOB_ID=${jobId} docker-compose -f docker-compose/mentor-test-runner.yml up`)
 	console.log('-------- start run tests done --------')
 }
 

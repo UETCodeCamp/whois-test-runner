@@ -14,13 +14,14 @@ app.use(bodyParser.urlencoded())
 // routes
 app.get('/', (req, res) => res.send('OKAY!'))
 app.post('/run', async (req, res) => {
-	const {student_repo, tester_repo: mentor_repo} = req.body
+	const {id, student_repo, tester_repo: mentor_repo} = req.body
 
+	console.log('id', id)
 	console.log('student_repo', student_repo)
 	console.log('mentor_repo', mentor_repo)
 
 	try {
-		runner.start(student_repo, mentor_repo)	
+		runner.start(id, student_repo, mentor_repo)	
 
 		return res.json({success: true})
 	} catch(err) {
