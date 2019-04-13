@@ -39,8 +39,9 @@ async function prepareTempDir(...dirs) {
 }
 
 async function startStudentServer(studentRepo) {
+	const env = 'PORT=3000 HOST=localhost MONGO_PATH=mongodb MONGO_PORT=27018 '
 	// make sure old stack is removed
-	await u._runBash('docker-compose -f docker-compose/student-server-runner.yml rm -sf')
+	await u._runBash(env + 'docker-compose -f docker-compose/student-server-runner.yml rm -sf')
 	console.log('-------- clean student\'s server stack done --------')
 
 	// clone project into student-repo
@@ -50,7 +51,7 @@ async function startStudentServer(studentRepo) {
 	await u._runBash('cd tmp/student-repo && npm install')	
 	
 	// start test-server stack: nodejs + mongodb
-	await u._runBash('PORT=3000 HOST=localhost MONGO_PATH=mongodb MONGO_PORT=27018 docker-compose -f docker-compose/student-server-runner.yml up -d')
+	await u._runBash(env + 'docker-compose -f docker-compose/student-server-runner.yml up -d')
 	console.log('-------- start test-server done --------')
 
 	// checking test-server ready
