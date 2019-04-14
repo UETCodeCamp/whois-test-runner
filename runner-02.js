@@ -50,23 +50,23 @@ async function startStudentRunner(studentRepo, env) {
 
 async function startMentorRunner(mentorRepo, env) {
 	// make sure old stack is removed
-	await u._runBash(env + ` docker-compose -f docker-compose/runner-02/mentor-test-runner.yml rm -sf`)
+	await u._runBash(env + ` docker-compose -f docker-compose/runner-02/mentor-runner.yml rm -sf`)
 	console.log('-------- clean mentor\'s server stack done --------')
 
 	// install node_modules
 	await u._runBash('cd tmp/mentor-repo && npm install')	
 	
 	// start stack: nodejs
-	const text = await u._runBash(env + ` docker-compose -f docker-compose/runner-02/mentor-test-runner.yml up`)
+	const text = await u._runBash(env + ` docker-compose -f docker-compose/runner-02/mentor-runner.yml up`)
 	console.log('text mentor bash', text)
 	console.log('-------- start run tests done --------')
 }
 
 async function cleanStack(env) {
-	await u._runBash(env + ' docker-compose -f docker-compose/runner-02/student-server-runner.yml rm -sf')
+	await u._runBash(env + ' docker-compose -f docker-compose/runner-02/student-runner.yml rm -sf')
 	console.log('-------- clean student\'s server stack done --------')
 
-	await u._runBash(env + ' docker-compose -f docker-compose/runner-02/mentor-test-runner.yml rm -sf')
+	await u._runBash(env + ' docker-compose -f docker-compose/runner-02/mentor-runner.yml rm -sf')
 	console.log('-------- clean mentor\'s server stack done --------')
 }
 
