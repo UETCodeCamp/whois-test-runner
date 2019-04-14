@@ -6,11 +6,8 @@ services:
     volumes:
       - ../tmp/mentor-repo:${MENTOR_REPO_PATH}
       - ../tmp/student-repo:${STUDENT_REPO_PATH}
-    ports:
-      - "3002:3002"
     environment:
       JOB_ID: ${JOB_ID}
-      STUDENT_HOST: ${STUDENT_HOST}
       SUBMIT_HOST: ${SUBMIT_HOST}
       SUBMIT_SECRET: ${SUBMIT_SECRET}
       STUDENT_REPO_PATH: ${STUDENT_REPO_PATH}

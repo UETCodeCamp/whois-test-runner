@@ -10,7 +10,7 @@ const app = express()
 // middlwares
 app.use(morgan('dev'))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded())
+app.use(bodyParser.urlencoded({extended: false}))
 
 // routes
 app.get('/', (req, res) => res.send('OKAY!'))

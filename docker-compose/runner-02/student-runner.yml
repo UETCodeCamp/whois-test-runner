@@ -5,13 +5,9 @@ services:
     image: minhnt95/student-runner-02
     volumes:
       - ../tmp/student-repo:/student-repo
-    ports:
-      - ${PORT}:3012
     networks:
       - test-net-02
     environment:
-      PORT: ${PORT}
-      HOST: ${HOST}
       STUDENT_REPO_PATH: ${STUDENT_REPO_PATH}
       STUDENT_STD_OUT_FILE: ${STUDENT_STD_OUT_FILE}
 networks:
