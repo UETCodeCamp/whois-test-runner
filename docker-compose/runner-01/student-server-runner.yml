@@ -10,7 +10,7 @@ services:
     links:
       - mongodb
     networks:
-      - my-net
+      - test-net
     environment:
       PORT: ${PORT}
       HOST: ${HOST}
@@ -24,7 +24,7 @@ services:
     ports:
       - ${MONGO_PORT}:27017
     networks:
-      - my-net
+      - test-net
 networks:
-    my-net:
+    test-net:
       driver: bridge

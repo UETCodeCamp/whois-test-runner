@@ -2,13 +2,13 @@ const rp = require('request-promise')
 const path = require('path')
 const pusher = require('@uet/pusher')
 
-const u = require('./util')
-const git = require('./git')
+const u = require('./helper/util')
+const git = require('./helper/git')
 
 //const studentRepo = 'https://github.com/minhnt95/student-repo-nodejs-mongo'
 //const mentorRepo = 'https://github.com/minhnt95/mentor-repo-nodejs'
-const studentRepoPath = path.join(__dirname, './tmp/student-repo')
-const mentorRepoPath = path.join(__dirname, './tmp/mentor-repo')
+const studentRepoPath = path.join(__dirname, 'tmp/student-repo')
+const mentorRepoPath = path.join(__dirname, 'tmp/mentor-repo')
 
 async function start(jobId, secret, studentRepo, mentorRepo) {
 	try {
@@ -40,20 +40,25 @@ async function prepareTempDir(...dirs) {
 	})
 }
 
+async function cloneProjects(studentRepo, mentorRepo) {
+	// clone project into student-repo
+	await git.clone(studentRepo, studentRepoPath)
+
+	// clone project into mentor-repo
+	await git.clone(mentorRepo, mentorRepoPath)
+}
+
 async function startStudentServer(studentRepo) {
 	const env = 'PORT=3000 HOST=0.0.0.0 MONGO_PATH=mongodb MONGO_PORT=27018 '
 	// make sure old stack is removed
-	await u._runBash(env + 'docker-compose -f docker-compose/student-server-runner.yml rm -sf')
+	await u._runBash(env + 'docker-compose -f docker-compose/runner-01/student-server-runner.yml rm -sf')
 	console.log('-------- clean student\'s server stack done --------')
-
-	// clone project into student-repo
-	await git.clone(studentRepo, studentRepoPath)
 
 	// install node_modules
 	await u._runBash('cd tmp/student-repo && npm install')	
 	
 	// start test-server stack: nodejs + mongodb
-	await u._runBash(env + 'docker-compose -f docker-compose/student-server-runner.yml up -d')
+	await u._runBash(env + 'docker-compose -f docker-compose/runner-01/student-server-runner.yml up -d')
 	console.log('-------- start test-server done --------')
 
 	// checking test-server ready
@@ -63,17 +68,14 @@ async function startStudentServer(studentRepo) {
 
 async function runMentorTests(mentorRepo, jobId, secret) {
 	// make sure old stack is removed
-	await u._runBash(`docker-compose -f docker-compose/mentor-test-runner.yml rm -sf`)
+	await u._runBash(`docker-compose -f docker-compose/runner-01/mentor-test-runner.yml rm -sf`)
 	console.log('-------- clean mentor\'s server stack done --------')
-
-	// clone project into mentor-repo
-	await git.clone(mentorRepo, mentorRepoPath)
 
 	// install node_modules
 	await u._runBash('cd tmp/mentor-repo && npm install')	
 	
 	// start stack: nodejs
-	const text = await u._runBash(`STUDENT_HOST=http://student_server:3000 SUBMIT_HOST=https://api-fame.hackermind.dev JOB_ID=${jobId} SUBMIT_SECRET=${secret} docker-compose -f docker-compose/mentor-test-runner.yml up`)
+	const text = await u._runBash(`STUDENT_HOST=http://student_server:3000 SUBMIT_HOST=https://api-fame.hackermind.dev JOB_ID=${jobId} SUBMIT_SECRET=${secret} docker-compose -f docker-compose/runner-01/mentor-test-runner.yml up`)
 	console.log('text mentor bash', text)
 	console.log('-------- start run tests done --------')
 }
@@ -81,10 +83,10 @@ async function runMentorTests(mentorRepo, jobId, secret) {
 async function cleanStack() {
 	const env = 'PORT=3000 HOST=0.0.0.0 MONGO_PATH=mongodb MONGO_PORT=27018 '
 
-	await u._runBash(env + 'docker-compose -f docker-compose/student-server-runner.yml rm -sf')
+	await u._runBash(env + 'docker-compose -f docker-compose/runner-01/student-server-runner.yml rm -sf')
 	console.log('-------- clean student\'s server stack done --------')
 
-	await u._runBash('docker-compose -f docker-compose/mentor-test-runner.yml rm -sf')
+	await u._runBash('docker-compose -f docker-compose/runner-01/mentor-test-runner.yml rm -sf')
 	console.log('-------- clean mentor\'s server stack done --------')
 }
 

@@ -13,7 +13,7 @@ services:
       SUBMIT_HOST: ${SUBMIT_HOST}
       SUBMIT_SECRET: ${SUBMIT_SECRET}
     networks:
-      - docker-compose_my-net
+      - runner-01_test-net
 networks:
-  docker-compose_my-net:
+  runner-01_test-net:
     external: true

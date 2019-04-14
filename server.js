@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
-const runner = require('./runner')
+const r1 = require('./runner-01')
 
 const port = 6969
 const app = express()
@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded())
 
 // routes
 app.get('/', (req, res) => res.send('OKAY!'))
-app.post('/run', async (req, res) => {
+app.post('/run/:name', async (req, res) => {
 	const {id, student_repo, tester_repo: mentor_repo} = req.body
 	const secret = req.headers['x-secret'];
 
@@ -23,7 +23,7 @@ app.post('/run', async (req, res) => {
 	console.log('secret', secret)
 
 	try {
-		runner.start(id, secret, student_repo, mentor_repo)	
+		r1.start(id, secret, student_repo, mentor_repo)	
 
 		return res.json({success: true})
 	} catch(err) {
