@@ -1,19 +1,23 @@
 version: "2"
 services:
   mentor_test:
-    container_name: mentor_test
-    image: minhnt95/mentor-test-runner
+    container_name: mentor_runner_02
+    image: minhnt95/mentor-runner-02
     volumes:
-      - ../tmp/mentor-repo:/mentor-repo
+      - ../tmp/mentor-repo:${MENTOR_REPO_PATH}
+      - ../tmp/student-repo:${STUDENT_REPO_PATH}
     ports:
-      - "3001:3001"
+      - "3002:3002"
     environment:
       JOB_ID: ${JOB_ID}
       STUDENT_HOST: ${STUDENT_HOST}
       SUBMIT_HOST: ${SUBMIT_HOST}
       SUBMIT_SECRET: ${SUBMIT_SECRET}
+      STUDENT_REPO_PATH: ${STUDENT_REPO_PATH}
+      MENTOR_REPO_PATH: ${MENTOR_REPO_PATH}
+      STUDENT_STD_OUT_FILE: ${STUDENT_STD_OUT_FILE}
     networks:
-      - runner-01_test-net
+      - runner-02_test-net-02
 networks:
-  runner-01_test-net:
+  runner-02_test-net-02:
     external: true
