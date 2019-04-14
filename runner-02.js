@@ -44,7 +44,8 @@ async function startStudentRunner(studentRepo, env) {
 	console.log('-------- clean student\'s server stack done --------')
 	
 	// start test-server stack: nodejs + mongodb
-	await u._runBash(env + ' docker-compose -f docker-compose/runner-02/student-runner.yml up')
+	const text = await u._runBash(env + ' docker-compose -f docker-compose/runner-02/student-runner.yml up')
+	console.log('student runner text', text)
 	console.log('-------- start test-server done --------')
 }
 
@@ -58,7 +59,7 @@ async function startMentorRunner(mentorRepo, env) {
 	
 	// start stack: nodejs
 	const text = await u._runBash(env + ` docker-compose -f docker-compose/runner-02/mentor-runner.yml up`)
-	console.log('text mentor bash', text)
+	console.log('mentor runner text', text)
 	console.log('-------- start run tests done --------')
 }
 
