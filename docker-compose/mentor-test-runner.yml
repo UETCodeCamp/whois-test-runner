@@ -11,6 +11,7 @@ services:
       JOB_ID: ${JOB_ID}
       STUDENT_HOST: ${STUDENT_HOST}
       SUBMIT_HOST: ${SUBMIT_HOST}
+      SUBMIT_SECRET: ${SUBMIT_SECRET}
     networks:
       - docker-compose_my-net
 networks:
