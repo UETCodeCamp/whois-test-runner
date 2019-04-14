@@ -4,8 +4,8 @@ services:
     container_name: mentor_runner_02
     image: minhnt95/mentor-runner-02
     volumes:
-      - ../tmp/mentor-repo:${MENTOR_REPO_PATH}
-      - ../tmp/student-repo:${STUDENT_REPO_PATH}
+      - ../../tmp/mentor-repo:${MENTOR_REPO_PATH}
+      - ../../tmp/student-repo:${STUDENT_REPO_PATH}
     environment:
       JOB_ID: ${JOB_ID}
       SUBMIT_HOST: ${SUBMIT_HOST}

@@ -4,7 +4,7 @@ services:
     container_name: student_server
     image: minhnt95/student-server-runner
     volumes:
-      - ../tmp/student-repo:/student-repo
+      - ../../tmp/student-repo:/student-repo
     ports:
       - ${PORT}:3000
     links:

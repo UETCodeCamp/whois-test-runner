@@ -4,7 +4,7 @@ services:
     container_name: mentor_test
     image: minhnt95/mentor-test-runner
     volumes:
-      - ../tmp/mentor-repo:/mentor-repo
+      - ../../tmp/mentor-repo:/mentor-repo
     ports:
       - "3001:3001"
     environment:
