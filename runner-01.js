@@ -12,7 +12,8 @@ const mentorRepoPath = path.join(__dirname, 'tmp/mentor-repo')
 
 async function start(jobId, secret, studentRepo, mentorRepo) {
 	try {
-		await prepareTempDir(studentRepoPath, mentorRepoPath)
+	 	await prepareTempDir(studentRepoPath, mentorRepoPath)
+		await cloneProjects(studentRepo, mentorRepo)
 		await startStudentServer(studentRepo)
 		await runMentorTests(mentorRepo, jobId, secret)
 		await cleanStack()
