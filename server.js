@@ -15,13 +15,15 @@ app.use(bodyParser.urlencoded())
 app.get('/', (req, res) => res.send('OKAY!'))
 app.post('/run', async (req, res) => {
 	const {id, student_repo, tester_repo: mentor_repo} = req.body
+	const secret = req.headers['x-secret'];
 
 	console.log('id', id)
 	console.log('student_repo', student_repo)
 	console.log('mentor_repo', mentor_repo)
+	console.log('secret', secret)
 
 	try {
-		runner.start(id, student_repo, mentor_repo)	
+		runner.start(id, secret, student_repo, mentor_repo)	
 
 		return res.json({success: true})
 	} catch(err) {
