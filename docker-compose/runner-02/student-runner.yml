@@ -4,7 +4,7 @@ services:
     container_name: student_runner_02
     image: minhnt95/student-runner-02
     volumes:
-      - ../tmp/student-repo:/student-repo
+      - ../../tmp/student-repo:/student-repo
     networks:
       - test-net-02
     environment:
