@@ -68,8 +68,8 @@ const _writeFile = async (file, content) => {
 }
 
 const _beforeRunFile = async (dir, input = {}) => {
-    await _runBash(`cd ${dir} && yarn install`)
-    await _runBash(`cd ${dir} yarn add dotenv`)
+    await _runBash(`cd ${dir} && npm install`)
+    await _runBash(`cd ${dir} npm install dotenv`)
 
     const envFile = uuid() + '.env'
     const envPath = path.join(dir, envFile)
