@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const r1 = require('./runner-01')
+const r2 = require('./runner-02')
 
 const port = 6969
 const app = express()
@@ -15,6 +16,7 @@ app.use(bodyParser.urlencoded())
 app.get('/', (req, res) => res.send('OKAY!'))
 app.post('/run/:name', async (req, res) => {
 	const {id, student_repo, tester_repo: mentor_repo} = req.body
+	const {name} = req.params
 	const secret = req.headers['x-secret'];
 
 	console.log('id', id)
@@ -23,7 +25,16 @@ app.post('/run/:name', async (req, res) => {
 	console.log('secret', secret)
 
 	try {
-		r1.start(id, secret, student_repo, mentor_repo)	
+		switch(name) {
+			case 'node-stdout':
+				r2.start(id, secret, student_repo, mentor_repo)	
+				break
+			case 'node-http':
+				r1.start(id, secret, student_repo, mentor_repo)	
+				break
+			default:
+				throw new Error('Runner is not found!')
+		}
 
 		return res.json({success: true})
 	} catch(err) {
