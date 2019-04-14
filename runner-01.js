@@ -1,9 +1,9 @@
+// node-http
 const rp = require('request-promise')
 const path = require('path')
 const pusher = require('@uet/pusher')
 
 const u = require('./helper/util')
-const git = require('./helper/git')
 const source = require('./source')
 
 const p1 = require('./pipelines/01-prepare-repo')

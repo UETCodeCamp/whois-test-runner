@@ -1,0 +1,30 @@
+version: "2"
+services:
+  student_server:
+    container_name: student_server
+    image: minhnt95/student-server-runner
+    volumes:
+      - ../tmp/student-repo:/student-repo
+    ports:
+      - ${PORT}:3000
+    links:
+      - mongodb
+    networks:
+      - test-net
+    environment:
+      PORT: ${PORT}
+      HOST: ${HOST}
+      MONGO_PATH: ${MONGO_PATH}
+      MONGO_PORT: ${MONGO_PORT}
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    #volumes:
+    #  - ./data:/data/db
+    ports:
+      - ${MONGO_PORT}:27017
+    networks:
+      - test-net
+networks:
+    test-net:
+      driver: bridge

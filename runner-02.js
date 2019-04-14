@@ -1,3 +1,4 @@
+// node-stdout
 const rp = require('request-promise')
 const path = require('path')
 const pusher = require('@uet/pusher')

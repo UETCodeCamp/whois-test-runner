@@ -1,4 +1,5 @@
 const u = require('../helper/util')
+const git = require('../helper/git')
 const source = require('../source')
 
 async function prepareTempDir(...dirs) {

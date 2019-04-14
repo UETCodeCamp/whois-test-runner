@@ -1,0 +1,19 @@
+version: "2"
+services:
+  mentor_test:
+    container_name: mentor_test
+    image: minhnt95/mentor-test-runner
+    volumes:
+      - ../tmp/mentor-repo:/mentor-repo
+    ports:
+      - "3001:3001"
+    environment:
+      JOB_ID: ${JOB_ID}
+      STUDENT_HOST: ${STUDENT_HOST}
+      SUBMIT_HOST: ${SUBMIT_HOST}
+      SUBMIT_SECRET: ${SUBMIT_SECRET}
+    networks:
+      - runner-01_test-net
+networks:
+  runner-01_test-net:
+    external: true
