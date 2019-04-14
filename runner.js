@@ -73,7 +73,8 @@ async function runMentorTests(mentorRepo, jobId, secret) {
 	await u._runBash('cd tmp/mentor-repo && npm install')	
 	
 	// start stack: nodejs
-	await u._runBash(`STUDENT_HOST=http://student_server:3000 SUBMIT_HOST=https://api-fame.hackermind.dev JOB_ID=${jobId} SUBMIT_SECRET=${secret} docker-compose -f docker-compose/mentor-test-runner.yml up`)
+	const text = await u._runBash(`STUDENT_HOST=http://student_server:3000 SUBMIT_HOST=https://api-fame.hackermind.dev JOB_ID=${jobId} SUBMIT_SECRET=${secret} docker-compose -f docker-compose/mentor-test-runner.yml up`)
+	console.log('text mentor bash', text)
 	console.log('-------- start run tests done --------')
 }
 
