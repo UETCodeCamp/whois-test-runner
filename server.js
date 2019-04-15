@@ -7,7 +7,7 @@ const r2 = require('./runner-02')
 const port = 6969
 const app = express()
 
-// middlwares
+// middlewares
 app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
