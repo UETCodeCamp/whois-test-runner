@@ -9,7 +9,7 @@ services:
       - "3001:3001"
     environment:
       JOB_ID: ${JOB_ID}
-      STUDENT_HOST: ${STUDENT_HOST}
+      STUDENT_HOST: ${STUDENT_ALTERNATIVE_HOST_R1}
       SUBMIT_HOST: ${SUBMIT_HOST}
       SUBMIT_SECRET: ${SUBMIT_SECRET}
     networks:

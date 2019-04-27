@@ -1,26 +1,26 @@
 {
-  "name": "uetcodecamp-runtest",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "SUBMIT_HOST=localhost:3222 PORT=6969 node server.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@uet/pusher": "^1.1.0",
-    "express": "^4.16.4",
-    "json-parser": "^1.1.5",
-    "mkdirp": "^0.5.1",
-    "morgan": "^1.9.1",
-    "path": "^0.12.7",
-    "request": "^2.88.0",
-    "request-promise": "^4.2.4",
-    "request-promise-native": "^1.0.7",
-    "rimraf": "^2.6.3",
-    "simple-git": "^1.110.0",
-    "uuid": "^3.3.2"
-  }
+	"name": "uetcodecamp-runtest",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "SUBMIT_HOST=localhost:3222 PORT=6969 node server.js"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@uet/pusher": "^1.1.0",
+		"express": "^4.16.4",
+		"json-parser": "^1.1.5",
+		"mkdirp": "^0.5.1",
+		"morgan": "^1.9.1",
+		"path": "^0.12.7",
+		"request": "^2.88.0",
+		"request-promise": "^4.2.4",
+		"request-promise-native": "^1.0.7",
+		"rimraf": "^2.6.3",
+		"simple-git": "^1.110.0",
+		"uuid": "^3.3.2"
+	}
 }

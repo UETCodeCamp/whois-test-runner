@@ -6,23 +6,23 @@ services:
     volumes:
       - ../../tmp/student-repo:/student-repo
     ports:
-      - ${PORT}:3000
+      - ${STUDENT_PORT_R1}:${STUDENT_PORT_R1}
     links:
       - mongodb
     networks:
       - test-net
     environment:
-      PORT: ${PORT}
-      HOST: ${HOST}
-      MONGO_PATH: ${MONGO_PATH}
-      MONGO_PORT: ${MONGO_PORT}
+      PORT: ${STUDENT_PORT_R1}
+      HOST: ${STUDENT_HOST_R1}
+      MONGO_PATH: ${MONGO_PATH_R1}
+      MONGO_PORT: ${MONGO_PORT_R1}
   mongodb:
     container_name: mongodb
-    image: mongo
+    image: mongo:3.6.12
     #volumes:
     #  - ./data:/data/db
     ports:
-      - ${MONGO_PORT}:27017
+      - ${MONGO_HOST_PORT_R1}:${MONGO_PORT_R1}
     networks:
       - test-net
 networks:

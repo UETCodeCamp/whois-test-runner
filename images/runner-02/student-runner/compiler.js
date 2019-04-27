@@ -68,8 +68,8 @@ const _writeFile = async (file, content) => {
 }
 
 const _beforeRunFile = async (dir, input = {}) => {
-    await _runBash(`cd ${dir} && npm install`)
-    await _runBash(`cd ${dir} npm install dotenv`)
+	//await _runBash(`cd ${dir} && npm install`)
+	//await _runBash(`cd ${dir} && npm install dotenv`)
 
     const envFile = uuid() + '.env'
     const envPath = path.join(dir, envFile)
@@ -89,9 +89,9 @@ const _beforeRunFile = async (dir, input = {}) => {
     return envFile
 }
 
-const _runJSFile = async (file, configPath) => {
+const _runJSFile = async (file) => {
     return new Promise((resolve, reject) => {
-        exec(`node -r dotenv/config ${file} dotenv_config_path=${configPath}`,
+        exec(`node ${file}`,
             (error, stdout, stderr) => {
                 if (error) {
                     console.error(error)
@@ -149,9 +149,9 @@ exports.compile = async (dir, input = {}) => {
         throw new Error('Main file is not Javascript file.')
     }
 
-    const configFile = await _beforeRunFile(dir, input)
-    const configPath = path.join(dir, configFile)
-    const out = await _runJSFile(mainFile, configPath)
+	//const configFile = await _beforeRunFile(dir, input)
+	//const configPath = path.join(dir, configFile)
+    const out = await _runJSFile(mainFile)
 
-    return _parseStdOut(out)
+    return out 
 }
