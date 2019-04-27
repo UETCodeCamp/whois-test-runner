@@ -1,7 +1,5 @@
 # UETCODECAMP run test
 
-Folder `student-repo` must be cloned into before run this script
-
 ## Prerequires
 Install some sofwares below:
 - docker
@@ -9,5 +7,5 @@ Install some sofwares below:
 
 ## Run
 `
-npm start
+pm2 start ecosystem.config.js
 `
