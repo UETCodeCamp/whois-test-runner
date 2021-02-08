@@ -1,9 +1,12 @@
-# UETCODECAMP run test
+# UETCODECAMP test runner
 
-## Prerequires
+## Link to article
+https://medium.com/@tutv/he-thong-kiem-tra-bai-tap-tu-dong-829e4dd20b92 (Vietnamese)
+
+## Prerequisite
 Install some sofwares below:
 - docker
-- node + npm
+- node + npm (ver 8)
 
 ## Run
 `
