@@ -20,7 +20,7 @@
 		"request-promise": "^4.2.4",
 		"request-promise-native": "^1.0.7",
 		"rimraf": "^2.6.3",
-		"simple-git": "^1.110.0",
+		"simple-git": "^3.3.0",
 		"uuid": "^3.3.2"
 	}
 }
